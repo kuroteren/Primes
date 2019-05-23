@@ -5,6 +5,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <ctime>
 
 using namespace std;
 
@@ -15,11 +16,14 @@ int main()
 	unsigned long int x = 1, y, max;
 	vector<int> listing;
 	bool prime = true;
+	clock_t start;
 
 	do {
 		cout << "Enter max number to test up to (Max number: " << ULONG_MAX << "): ";
 		cin >> max;
 	} while (max == 0);
+
+	start = clock();
 
 	for (x; x <= max ; x++)
 	{
@@ -27,7 +31,7 @@ int main()
 
 		cout << CLS;
 
-		cout << "Completed: " << (double)((x / max)*100) << "%" << endl;
+		cout << "Completed: " << (((double)x / (double)max)*100) << "%" << endl;
 
 		for (auto it = listing.begin(); it != listing.end(); it++)
 		{
@@ -58,6 +62,11 @@ int main()
 	{
 		cout << *it << ", ";
 	}
+
+	double execution = (clock() - start) / (double)CLOCKS_PER_SEC;
+
+	cout << endl << "Execution time: " << execution;
+	system("pause");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
