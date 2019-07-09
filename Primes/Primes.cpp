@@ -14,6 +14,7 @@ using namespace std;
 int main()
 {
 	unsigned long int x = 1, y, max;
+	int loopFormat = 0;
 	vector<int> listing;
 	bool prime = true;
 	clock_t start;
@@ -21,7 +22,7 @@ int main()
 	do {
 		cout << "Enter max number to test up to (Max number: " << ULONG_MAX << "): ";
 		cin >> max;
-	} while (max == 0);
+	} while (max <= 0 || max > ULONG_MAX);
 
 	start = clock();
 
@@ -31,7 +32,7 @@ int main()
 
 		cout << CLS;
 
-		cout << "Completed: " << (((double)x / (double)max)*100) << "%" << endl;
+		cout << "Completed: " << (((double)x / (double)max)*100) << "%\t (" << x << "/" << max << ")" << endl;
 
 		for (auto it = listing.begin(); it != listing.end(); it++)
 		{
@@ -56,26 +57,27 @@ int main()
 		}
 	}
 
-	cout << "The primes within limit(1::" << max << ") are:" << endl;
+	cout << "The primes within limit(1::" << max << ") are:" << endl << endl;
 
 	for (auto it = listing.begin(); it != listing.end(); it++)
 	{
-		cout << *it << ", ";
+		loopFormat++;
+		
+		cout << *it;
+
+		loopFormat = loopFormat % 15;
+
+		if (loopFormat == 0) {
+			cout << endl;
+		}
+		else
+		{
+			cout << "\t";
+		}
 	}
 
 	double execution = (clock() - start) / (double)CLOCKS_PER_SEC;
 
-	cout << endl << "Execution time: " << execution;
+	cout << endl << endl << "Execution time: " << execution << " seconds" << endl;
 	system("pause");
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
